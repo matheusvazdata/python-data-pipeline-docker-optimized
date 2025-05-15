@@ -27,5 +27,40 @@ Este projeto demonstra a criação de um **pipeline simples de dados em Python**
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seuusuario/python-data-pipeline-docker-optimized.git
+   git clone https://github.com/matheusvazdata/python-data-pipeline-docker-optimized.git
    cd python-data-pipeline-docker-optimized
+
+2. Construa a imagem Docker:
+
+   ```bash
+   docker build -t python-data-pipeline .
+   ```
+
+3. Execute o container:
+
+   ```bash
+   docker run --rm python-data-pipeline
+   ```
+
+4. (Opcional) Orquestração completa com Docker Compose:
+
+   ```bash
+   docker compose up --build
+   ```
+
+5. Acesse a API (se implementada):
+    ```bash
+   * [http://localhost:5000](http://localhost:5000)
+    ```
+
+## 📁 Estrutura do projeto
+
+```bash
+├── app/
+│   ├── main.py
+│   └── ...
+├── Dockerfile
+├── docker-compose.yml
+├── .dockerignore
+└── README.md
+```
