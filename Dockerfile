@@ -1,17 +1,26 @@
+# Builder: usa Python completo (evita dores de Alpine para builds)
+FROM python:3.10 AS builder
+
+WORKDIR /install
+
+COPY app/requirements.txt .
+
+RUN pip install --prefix=/install --no-cache-dir -r requirements.txt
+
+
+# Runtime: imagem leve com Alpine, sem build tools
 FROM python:3.10-alpine
 
 WORKDIR /app
 
-# Instalar dependências de sistema necessárias no Alpine (compiladores, etc.)
-RUN apk add --no-cache gcc musl-dev libffi-dev
+# Melhorias para produção
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
 
-# Copiar apenas arquivos necessários
-COPY app/requirements.txt .
+# Copiar apenas as dependências do builder
+COPY --from=builder /install /usr/local
 
-# Instalar dependências Python sem cache
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copiar código da aplicação
+# Copiar apenas a aplicação
 COPY app/ .
 
 EXPOSE 5000
