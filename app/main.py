@@ -3,9 +3,9 @@ from fastapi import FastAPI
 app = FastAPI()
 
 @app.get("/")
-def home():
-    return {"message": "Pipeline de Dados com Python e Docker Otimizado"}
+def read_root():
+    return {"message": "Pipeline is running on Alpine!"}
 
-@app.get("/health")
-def health():
-    return {"status": "ok"}
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=5000)
