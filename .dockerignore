@@ -1,8 +1,13 @@
 __pycache__
 *.pyc
 *.pyo
+*.pyd
+.Python
+env/
+venv/
+.idea
+.vscode
 .dockerignore
 .git
 .gitignore
-Dockerfile
-README.md
+tests/
